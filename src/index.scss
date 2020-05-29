@@ -1,18 +1,4 @@
 @import 'bulma';
 @import '~bulma-slider';
 
-$cell-side-length: 20px;
-
-.cell {
-  width: $cell-side-length;
-  height: $cell-side-length;
-  border: 1px solid black;
-}
-
-.alive {
-  background-color: black;
-}
-
-.dead {
-  background-color: white;
-}
+@import './styles';
