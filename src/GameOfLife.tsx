@@ -9,6 +9,8 @@ export function toggle(bool: boolean): boolean {
   return !bool;
 }
 
+const simulationSpeedId = 'simulation-speed';
+
 export function GameOfLife(): ReactElement {
   const [grid, setGrid] = useState(initialGrid);
   const [started, setStarted] = useState(false);
@@ -86,7 +88,9 @@ export function GameOfLife(): ReactElement {
           </p>
         </div>
         <div className="field">
-          <label className="label">Time between simulation iterations: {simulationSpeed} ms</label>
+          <label className="label" htmlFor={simulationSpeedId}>
+            Time between simulation iterations: {simulationSpeed} ms
+          </label>
           <p className="control">
             <input
               type="range"
@@ -94,6 +98,7 @@ export function GameOfLife(): ReactElement {
               step="50"
               min="100"
               max="2000"
+              id={simulationSpeedId}
               value={simulationSpeed}
               onChange={onChangeSimulationSpeed}
             />
