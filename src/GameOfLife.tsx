@@ -2,7 +2,7 @@ import React, { useState, useMemo, useCallback, ReactElement } from 'react';
 
 import { useInterval } from './hooks/useInterval';
 
-import { initialGrid, randomGrid, runSimulation, numCols } from './Grid';
+import { randomGrid, runSimulation, numCols, Grid } from './Grid';
 import { Cell } from './Cell';
 
 export function toggle(bool: boolean): boolean {
@@ -11,10 +11,20 @@ export function toggle(bool: boolean): boolean {
 
 const simulationSpeedId = 'simulation-speed';
 
-export function GameOfLife(): ReactElement {
+interface GameOfLifeProps {
+  initialGrid: Grid;
+  hasStarted: boolean;
+  simulationSpeedMs: number;
+}
+
+export function GameOfLife({
+  initialGrid,
+  hasStarted,
+  simulationSpeedMs,
+}: GameOfLifeProps): ReactElement<GameOfLifeProps> {
   const [grid, setGrid] = useState(initialGrid);
-  const [started, setStarted] = useState(false);
-  const [simulationSpeed, setSimulationSpeed] = useState(750);
+  const [started, setStarted] = useState(hasStarted);
+  const [simulationSpeed, setSimulationSpeed] = useState(simulationSpeedMs);
 
   const toggleStarted = useCallback(() => {
     setStarted(toggle);
@@ -28,7 +38,7 @@ export function GameOfLife(): ReactElement {
   const reset = useCallback(() => {
     setStarted(false);
     setGrid(initialGrid);
-  }, []);
+  }, [initialGrid]);
 
   const onChangeSimulationSpeed = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     setSimulationSpeed(event.target.valueAsNumber);

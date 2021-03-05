@@ -44,7 +44,7 @@ function createGrid(cellPopulator: () => boolean): Grid {
   return Array.from({ length: numRows }, () => Array.from({ length: numCols }, () => cellPopulator()));
 }
 
-export function initialGrid(): Grid {
+export function emptyGrid(): Grid {
   return createGrid(() => false);
 }
 
